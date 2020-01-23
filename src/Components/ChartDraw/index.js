@@ -28,16 +28,13 @@ for (let i = 0; i < 100; i++) {
 }
 
 function ChartDraw() {
-    const [chartData, setChartData] = useState([{
+    let [chartData, setChartData] = useState([{
         "date": new Date().toLocaleTimeString(),
         "rateUSD": randomInteger(50, 60)
     }]);
 
     useEffect(() => {
         setInterval(() => {
-                //addNewRate();
-                console.log("Старый массив:")
-                console.log(chartData)
                 setChartData(
                     chartData.concat([
                         {
@@ -45,15 +42,14 @@ function ChartDraw() {
                             "rateUSD": randomInteger(50, 60)
                         }])
                 );
-                console.log("Новый массив:");
                 console.log(chartData)
             }, 5000
         )
-    }, []);
+    },[]);
 
     return (
         <div>
-            <AreaChart width={1500} height={250} data={chartData}
+            <AreaChart width={1000} height={250} data={chartData}
                        margin={{top: 10, right: 30, left: 0, bottom: 0}}>
                 <XAxis dataKey="date" domain={['auto', 'auto']}/>
                 <YAxis dataKey="rateUSD" domain={['auto', 'auto']}/>
