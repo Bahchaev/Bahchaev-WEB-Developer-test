@@ -1,3 +1,5 @@
+//Realtime chart drawing
+
 import React, {Component} from 'react';
 import CanvasJSReact from '../../canvasjs.react';
 
@@ -6,10 +8,12 @@ let CanvasJSChart = CanvasJSReact.CanvasJSChart;
 function randomInteger(min, max) {
     min = min * 100;
     max = max * 100;
-    let rand = min - 0.5 + Math.random() * (max - min + 1);
+    let rand = min - 50 + Math.random() * (max - min + 100);
     return Math.round(rand) / 100;
 }
 
+
+//Chart data
 let chartData = [
     {
         x: new Date(),
@@ -20,6 +24,7 @@ let xVal = chartData.length + 1;
 let yVal = 15;
 let updateInterval = 1000;
 
+//Chart component
 class DynamicLineChart extends Component {
     constructor() {
         super();
@@ -34,7 +39,7 @@ class DynamicLineChart extends Component {
         yVal = randomInteger(50,60);
         xVal = new Date();
         chartData.push({x: xVal, y: yVal});
-        if (chartData.length > 100) {
+        if (chartData.length > 100) { //chart showing depth
             chartData.shift();
         }
         this.chart.render();
@@ -43,7 +48,7 @@ class DynamicLineChart extends Component {
     render() {
         const options = {
             title: {
-                text: "Dynamic Line Chart"
+                text: ""
             },
             data: [{
                 type: "line",
@@ -53,7 +58,7 @@ class DynamicLineChart extends Component {
 
         return (
             <div>
-                <h1>React Dynamic Line Chart</h1>
+                <h1>Обмен валют</h1>
                 <CanvasJSChart options={options}
                                onRef={ref => this.chart = ref}
                 />
